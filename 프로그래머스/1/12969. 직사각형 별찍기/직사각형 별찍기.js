@@ -8,10 +8,7 @@ process.stdin.on('data', data => {
         answer += "*"
     }
     
-    let tmp = answer;
-    for (let j = 1; j < b; j++) {
-        answer += '\n' + tmp
+    for (let j = 0; j < b; j++) {
+        console.log(answer)
     }  
-    
-    console.log(answer)
 });
