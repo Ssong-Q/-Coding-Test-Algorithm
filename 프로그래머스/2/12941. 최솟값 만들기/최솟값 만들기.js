@@ -1,9 +1,17 @@
+/**
+ * 2가지 배열이 들어올 때, 각 배열의 숫자들을 곱한 값들을 다 더했을 때, 최솟값을 구해서 리턴하는 함수
+ * @param {number[]} A
+ * @param {number[]} B
+ * @returns 곱한 값들을 다 더한 값 중 최솟값
+ */
+
 function solution(A, B) {
-  const SORTED_A = A.sort((a, b) => a - b);
-  const SORTED_B = B.sort((a, b) => b - a);
-  let result = 0;
-  for (let i = 0; i < SORTED_A.length; i++) {
-    result += SORTED_A[i] * SORTED_B[i];
-  }
-  return result;
+  let answer = 0;
+
+  A.sort((a, b) => a - b);
+  B.sort((a, b) => b - a);
+
+  answer = A.reduce((acc, v, i) => acc + v * B[i], answer);
+
+  return answer;
 }
