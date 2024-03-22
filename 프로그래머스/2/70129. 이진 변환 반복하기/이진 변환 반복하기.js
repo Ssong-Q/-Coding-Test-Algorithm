@@ -1,24 +1,22 @@
-function conversion(s) {
-  let zeroNum = 0;
-  let s2 = s.replaceAll("0", "");
-  const len = s.length;
-  const s2Len = s2.length;
-  zeroNum = len - s2Len;
-  s2 = s2Len.toString(2);
-  return [zeroNum, s2];
-}
-
 function solution(s) {
-  let answer;
-  let zeroNum = 0;
-  let count = 0;
-  let string = s;
-  while (string !== "1") {
-    let num;
-    count++;
-    [num, string] = conversion(string);
-    zeroNum += num;
+  let answer = [],
+    turn = 0,
+    zeroNum = 0;
+
+  while (s !== "1") {
+    turn++;
+
+    const removeZero = s
+      .split("")
+      .filter((v) => v !== "0")
+      .join("");
+    const len = removeZero.length;
+    zeroNum += s.length - len;
+
+    s = len.toString(2);
   }
-  answer = [count, zeroNum];
+
+  answer = [turn, zeroNum];
+
   return answer;
 }
