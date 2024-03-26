@@ -1,13 +1,24 @@
 function solution(s) {
-  let arr = s.split(" ");
-  arr.forEach((el, index) => {
-    let word = el.split("");
-    for (let i = 0; i < word.length; i++) {
-      i % 2 === 0
-        ? word.splice(i, 1, word[i].toUpperCase())
-        : word.splice(i, 1, word[i].toLowerCase());
+  let answer = "",
+    flag = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === " ") {
+      flag = 0;
+      answer += s[i];
+      continue;
     }
-    arr.splice(index, 1, word.join(""));
-  });
-  return arr.join(" ");
+    if (flag % 2 === 0) {
+      answer += s[i].toUpperCase();
+      flag++;
+      continue;
+    }
+    if (flag % 2 === 1) {
+      answer += s[i].toLowerCase();
+      flag++;
+      continue;
+    }
+  }
+
+  return answer;
 }
