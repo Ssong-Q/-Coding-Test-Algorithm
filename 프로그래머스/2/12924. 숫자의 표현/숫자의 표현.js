@@ -1,21 +1,25 @@
 function solution(n) {
   let answer = 0,
-    lt = 1,
-    total = 0;
-  const len = Math.ceil(n / 2);
-  for (let rt = 1; rt <= len; rt++) {
-    total += rt;
-    if (total === n) answer++;
-    if (total > n) {
-      while (total > n) {
-        total -= lt;
-        lt++;
-        if (total === n) {
-          answer++;
-        }
-      }
+    p1 = 0,
+    p2 = 0,
+    sum = 1,
+    arr = Array.from({ length: n }, (_, i) => i + 1);
+
+  while (p1 < n || p2 < n) {
+    if (sum < n) {
+      p2++;
+      sum += arr[p2];
+    }
+    if (sum > n) {
+      sum -= arr[p1];
+      p1++;
+    }
+    if (sum === n) {
+      sum -= arr[p1];
+      p1++;
+      answer++;
     }
   }
-  if (n === 1) return answer;
-  else return answer + 1;
+
+  return answer;
 }
