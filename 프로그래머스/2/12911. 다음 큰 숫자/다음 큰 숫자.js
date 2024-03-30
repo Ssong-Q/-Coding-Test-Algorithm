@@ -1,16 +1,27 @@
 function solution(n) {
-  let answer = 0;
-  let nextNum = n + 1;
-  let num = n.toString(2);
-  let count = 0;
-  num.split("").forEach((item) => item === "1" && count++);
-  while (true) {
-    let nextCount = 0;
-    let biNextNum = nextNum.toString(2);
-    biNextNum.split("").forEach((item) => item === "1" && nextCount++);
-    if (count === nextCount) break;
-    else nextNum++;
+  let answer = 0,
+    count = 0;
+  const ORIGIN = n.toString(2);
+  for (let c of ORIGIN) {
+    if (c === "1") count++;
   }
-  answer = nextNum;
+
+  n++;
+
+  while (true) {
+    let countSecond = 0;
+    const BI = n.toString(2);
+
+    for (let c of BI) {
+      if (c === "1") countSecond++;
+    }
+
+    if (count === countSecond) break;
+
+    n++;
+  }
+
+  answer = n;
+
   return answer;
 }
