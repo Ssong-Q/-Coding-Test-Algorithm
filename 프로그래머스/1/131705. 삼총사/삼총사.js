@@ -1,32 +1,13 @@
-let sumArr = [];
+function solution(number) {
+  let answer = 0;
 
-const trioSum = (arr) => {
-  if (arr.length < 3) {
-    return;
-  } else if (arr.length === 3) {
-    sumArr.push(arr[0] + arr[1] + arr[2]);
-    return;
-  } else {
-    for (let i = 1; i < arr.length - 1; i++) {
-      for (let j = 2; j < arr.length; j++) {
-        if (i >= j) {
-          continue;
-        }
-        sumArr.push(arr[0] + arr[i] + arr[j]);
+  for (let i = 0; i < number.length - 2; i++) {
+    for (let j = i + 1; j < number.length - 1; j++) {
+      for (let z = j + 1; z < number.length; z++) {
+        if (number[i] + number[j] + number[z] === 0) answer++;
       }
     }
-    arr.shift();
-    trioSum(arr);
   }
-};
 
-function solution(number) {
-  trioSum(number);
-  let zeroNum = 0;
-  for (let num of sumArr) {
-    if (num === 0) {
-      zeroNum += 1;
-    }
-  }
-  return zeroNum;
+  return answer;
 }
