@@ -1,13 +1,13 @@
-const solution = (s) => {
-  let arr = s.split("");
-  let temp = [];
-  for (let i = 0; i < arr.length; i++) {
-    temp.push(arr[i]);
-    if (temp[temp.length - 1] === temp[temp.length - 2]) {
-      temp.pop();
-      temp.pop();
-    }
+function solution(s) {
+  let answer = 0,
+    arr = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (arr[arr.length - 1] === s[i]) arr.pop();
+    else arr.push(s[i]);
   }
-  if (temp.length) return 0;
-  else return 1;
-};
+
+  if (arr.length === 0) answer = 1;
+
+  return answer;
+}
