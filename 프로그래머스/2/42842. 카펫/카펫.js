@@ -1,11 +1,20 @@
 function solution(brown, yellow) {
-  let total = brown + yellow;
-  for (let w = 3; w <= brown - 2; w++) {
-    for (let h = 3; h <= brown - 2; h++) {
-      if (w * h === total && w >= h) {
-        if ((w - 2) * (h - 2) === yellow && 2 * w + 2 * h - 4 === brown)
-          return [w, h];
-      }
+  let answer = [],
+    sum = brown + yellow;
+
+  for (let width = 3; width <= Math.ceil(sum / 3); width++) {
+    if (sum % width !== 0) continue;
+
+    const height = sum / width;
+
+    const p1 = width * 2 + 2 * (height - 2);
+    const p2 = (width - 2) * (height - 2);
+
+    if (p1 === brown && p2 === yellow) {
+      answer = [Math.max(width, height), Math.min(width, height)];
+      break;
     }
   }
+
+  return answer;
 }
