@@ -1,24 +1,34 @@
-function moveChar(string) {
-  const charCode = string.charCodeAt(0);
-  if (charCode === 122) {
-    return String.fromCharCode(97);
-  } else if (charCode === 90) {
-    return String.fromCharCode(65);
-  }
-  return String.fromCharCode(charCode + 1);
-}
-
 function solution(s, n) {
-  let answer = "";
-  let arr = s.split("");
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === " ") {
+  let answer = "",
+    arr = s.split(""),
+    stack = [];
+
+  for (let x of arr) {
+    if (x === " ") {
+      stack.push(" ");
       continue;
     }
-    for (let j = 0; j < n; j++) {
-      arr.splice(i, 1, moveChar(arr[i]));
-    }
+
+    let xSum = x.charCodeAt() + n;
+    if (
+      x.charCodeAt() >= 65 &&
+      x.charCodeAt() <= 90 &&
+      xSum >= 91 &&
+      xSum <= 115
+    )
+      xSum -= 26;
+    if (
+      x.charCodeAt() >= 97 &&
+      x.charCodeAt() <= 122 &&
+      xSum >= 123 &&
+      xSum <= 147
+    )
+      xSum -= 26;
+
+    stack.push(String.fromCharCode(xSum));
   }
-  answer = arr.join("");
+
+  answer = stack.join("");
+
   return answer;
 }
