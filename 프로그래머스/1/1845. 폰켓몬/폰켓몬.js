@@ -1,8 +1,11 @@
 function solution(nums) {
-  let numArr = [...new Set(nums)];
-  if (nums.length / 2 <= numArr.length) {
-    return nums.length / 2;
-  } else {
-    return numArr.length;
-  }
+  let answer = 0;
+
+  const N = nums.length / 2;
+  const len = [...new Set(nums)].length;
+
+  if (N <= len) answer = N;
+  else answer = len;
+
+  return answer;
 }
