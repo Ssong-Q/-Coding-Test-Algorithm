@@ -1,13 +1,20 @@
 function solution(s) {
   let answer = [];
-  for (let i = 0; i < s.length; i++) {
-    const INDEX = s.indexOf(s[i]);
-    if (INDEX === i) {
-      answer.push(-1);
-    } else if (INDEX < i) {
-      answer.push(i - INDEX);
-      s = s.replace(s[i], " ");
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    let dis = -1;
+
+    for (let j = i; j >= 0; j--) {
+      if (s[i] === s[j]) {
+        if (i !== j) {
+          dis = i - j;
+          break;
+        } else continue;
+      }
     }
+
+    answer.unshift(dis);
   }
+
   return answer;
 }
