@@ -1,22 +1,24 @@
 function solution(s) {
-  const NUMBERS = [
-    "zero",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-  ];
+  let answer = 0;
+  const obj = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  const arr = Object.entries(obj);
 
-  let word = s;
+  arr.forEach((el) => {
+    if (s.includes(el[0])) s = s.replaceAll(el[0], el[1]);
+  });
 
-  for (let i = 0; i < NUMBERS.length; i++) {
-    word = word.replaceAll(NUMBERS[i], i.toString());
-  }
+  answer = parseInt(s);
 
-  return parseInt(word);
+  return answer;
 }
