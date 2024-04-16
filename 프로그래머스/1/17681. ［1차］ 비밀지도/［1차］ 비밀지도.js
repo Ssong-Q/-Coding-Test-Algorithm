@@ -1,24 +1,17 @@
-function combineMaps(n, arr1, arr2) {
-  let result = [];
+function solution(n, arr1, arr2) {
+  let answer = [];
+
+  arr1 = arr1.map((val) => val.toString(2).padStart(n, 0));
+  arr2 = arr2.map((val) => val.toString(2).padStart(n, 0));
 
   for (let i = 0; i < arr1.length; i++) {
-    let code = "";
-    for (let j = 0; j < n; j++) {
-      code = code + (Number(arr1[i][j]) || Number(arr2[i][j]));
+    let temp = "";
+    for (let j = 0; j < arr1[i].length; j++) {
+      if (arr1[i][j] === "1" || arr2[i][j] === "1") temp += "#";
+      else temp += " ";
     }
-    code = code.replaceAll("1", "#").replaceAll("0", " ");
-    result.push(code);
-  }
-  return result;
-}
-
-function solution(n, arr1, arr2) {
-  let arr1Code = [];
-  let arr2Code = [];
-  for (let i = 0; i < n; i++) {
-    arr1Code.push(arr1[i].toString(2).padStart(n, "0"));
-    arr2Code.push(arr2[i].toString(2).padStart(n, "0"));
+    answer.push(temp);
   }
 
-  return combineMaps(n, arr1Code, arr2Code);
+  return answer;
 }
