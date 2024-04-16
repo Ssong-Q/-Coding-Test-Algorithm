@@ -1,14 +1,13 @@
-function theNumber(array, command) {
-  let slicedArray = array
-    .slice(command[0] - 1, command[1])
-    .sort((a, b) => a - b);
-  return slicedArray[command[2] - 1];
-}
-
 function solution(array, commands) {
   let answer = [];
+
   for (let i = 0; i < commands.length; i++) {
-    answer.push(theNumber(array, commands[i]));
+    let temp = [];
+    const AT = commands[i][2];
+    temp = array.slice(commands[i][0] - 1, commands[i][1]);
+    temp.sort((a, b) => a - b);
+    answer.push(temp[AT - 1]);
   }
+
   return answer;
 }
