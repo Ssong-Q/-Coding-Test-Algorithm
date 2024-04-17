@@ -1,43 +1,25 @@
 function solution(answers) {
-  let result = [];
-  let personOne = "12345".repeat(10000 / 5);
-  let personTwo = "21232425".repeat(10000 / 8);
-  let personThree = "3311224455".repeat(10000 / 10);
+  let answer = [],
+    result1 = 0,
+    result2 = 0,
+    result3 = 0,
+    maxNum = 0;
 
-  personOne = personOne.split("").slice(0, answers.length);
-  personTwo = personTwo.split("").slice(0, answers.length);
-  personThree = personThree.split("").slice(0, answers.length);
+  const p1 = [1, 2, 3, 4, 5];
+  const p2 = [2, 1, 2, 3, 2, 4, 2, 5];
+  const p3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
 
-  let countOne = 0;
-  let countTwo = 0;
-  let countThree = 0;
-
-  for (let i = 0; i < answers.length; i++) {
-    if (answers[i] === Number(personOne[i])) {
-      countOne++;
-    }
-    if (answers[i] === Number(personTwo[i])) {
-      countTwo++;
-    }
-    if (answers[i] === Number(personThree[i])) {
-      countThree++;
-    }
-  }
-
-  let arr = [
-    [1, countOne],
-    [2, countTwo],
-    [3, countThree],
-  ];
-  let maximum = Math.max(countOne, countTwo, countThree);
-
-  for (let i = 0; i < 3; i++) {
-    if (maximum === arr[i][1]) {
-      result.push(arr[i]);
-    }
-  }
-
-  return result.map((i) => {
-    return i[0];
+  answers.forEach((_, idx) => {
+    if (p1[idx % p1.length] === answers[idx]) result1++;
+    if (p2[idx % p2.length] === answers[idx]) result2++;
+    if (p3[idx % p3.length] === answers[idx]) result3++;
   });
+
+  maxNum = Math.max(result1, result2, result3);
+
+  result1 === maxNum && answer.push(1);
+  result2 === maxNum && answer.push(2);
+  result3 === maxNum && answer.push(3);
+
+  return answer;
 }
