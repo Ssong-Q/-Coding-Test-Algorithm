@@ -1,12 +1,15 @@
 function solution(food) {
-  let foodOrder = [];
-  food.shift();
-  food
-    .map((item) => {
-      return Math.floor(item / 2);
-    })
-    .forEach((item, index) => {
-      foodOrder.push((index + 1).toString().repeat(item));
-    });
-  return foodOrder.join("") + "0" + foodOrder.reverse().join("");
+  let answer = "",
+    result = [];
+
+  for (let i = 1; i < food.length; i++) {
+    const rep = Math.floor(food[i] / 2);
+    for (let j = 0; j < rep; j++) {
+      result.push(i);
+    }
+  }
+
+  answer = result.join("") + "0" + result.reverse().join("");
+
+  return answer;
 }
