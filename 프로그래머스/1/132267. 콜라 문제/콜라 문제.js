@@ -1,14 +1,14 @@
 function solution(a, b, n) {
-  let remainder = n;
-  let freeCoke = 0;
+  let answer = 0;
 
-  while (remainder >= a) {
-    const SHARE = Math.floor(n / a);
-
-    freeCoke = freeCoke + SHARE * b;
-    remainder = n - SHARE * a + SHARE * b;
-    n = remainder;
+  while (n >= a) {
+    let temp = n;
+    // 몫
+    n = Math.floor(n / a) * b;
+    answer += n;
+    // 나머지
+    n += temp % a;
   }
 
-  return freeCoke;
+  return answer;
 }
