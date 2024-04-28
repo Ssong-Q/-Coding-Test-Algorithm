@@ -1,28 +1,19 @@
 function solution(k, score) {
-  let result = [];
-  let beforeKArr = score.slice(0, k);
-  let sortedBeforeKArr = beforeKArr.slice().sort((a, b) => a - b);
-  let AfterArr = score.slice(k);
+  let answer = [],
+    stack = [];
 
-  if (k >= score.length) {
-    beforeKArr = score.slice();
-    for (let i = 0; i < beforeKArr.length; i++) {
-      result.push(Math.min(...beforeKArr.slice(0, i + 1)));
-    }
-  } else {
-    for (let i = 0; i < k; i++) {
-      result.push(Math.min(...beforeKArr.slice(0, i + 1)));
-    }
-
-    for (let number of AfterArr) {
-      if (number > sortedBeforeKArr[0]) {
-        sortedBeforeKArr.shift();
-        sortedBeforeKArr.push(number);
-        sortedBeforeKArr.sort((a, b) => a - b);
+  for (let i = 0; i < score.length; i++) {
+    if (stack.length < k) stack.push(score[i]);
+    else {
+      if (score[i] > stack[stack.length - 1]) {
+        stack.pop();
+        stack.push(score[i]);
       }
-      result.push(Math.min(...sortedBeforeKArr));
     }
+
+    stack.sort((a, b) => b - a);
+    answer.push(Math.min(...stack));
   }
 
-  return result;
+  return answer;
 }
